@@ -90,6 +90,8 @@ laser_surface = pygame.image.load(join("images", "laser.png"))
 
 # Sprites
 all_sprites = pygame.sprite.Group()
+meteor_sprites = pygame.sprite.Group()
+laser_sprites = pygame.sprite.Group()
 
 for i in range(20):
     Star(all_sprites, star_surf)
@@ -97,7 +99,7 @@ player = Player(all_sprites)
 
 # Custom Events
 meteor_event = pygame.event.custom_type()
-pygame.time.set_timer(meteor_event, 500)
+pygame.time.set_timer(meteor_event, 50)
 
 
 while running:
@@ -107,11 +109,13 @@ while running:
             running = False
         if event.type == meteor_event:
             x, y = randint(0, WINDOW_WIDTH), randint(-200, -100)
-            Meteor(meteor_surface, (x, y), all_sprites)
+            Meteor(meteor_surface, (x, y), (all_sprites, meteor_sprites))
     # Update
     all_sprites.update(dt)
+    pygame.sprite.spritecollide(player, meteor_sprites, True)
     # Draw the game
     display_surface.fill('purple')
     all_sprites.draw(display_surface)
+    # Test collision
     pygame.display.update()
 pygame.quit()
