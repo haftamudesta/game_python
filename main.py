@@ -62,16 +62,39 @@ class Laser(pygame.sprite.Sprite):
 class Meteor(pygame.sprite.Sprite):
     def __init__(self, surf, pos, groups):
         super().__init__(groups)
+        self.original_surf = surf
         self.image = surf
         self.rect = self.image.get_rect(center=pos)
         self.start_time = pygame.time.get_ticks()
         self.lifetime = 3000
         self.direction = pygame.Vector2(uniform(-0.5, 0.5), 1)
         self.speed = randint(400, 500)
+        self.rotation_speed = randint(20, 50)
+        self.rotation = 0
 
     def update(self, dt):
         self.rect.center += self.direction*self.speed*dt
         if pygame.time.get_ticks()-self.start_time >= self.lifetime:
+            self.kill()
+        self.rotation += (self.rotation + self.rotation_speed * dt) % 360
+        self.image = pygame.transform.rotozoom(
+            self.original_surf, self.rotation, 1)
+        self.rect = self.image.get_rect(center=self.rect.center)
+
+
+class AnimationExplosion(pygame.sprite.Sprite):
+    def __init__(self, frames, pos, groups):
+        super().__init__(groups)
+        self.frames = frames
+        self.frame_index = 0
+        self.image = self.frames[self.frame_index]
+        self.rect = self.image.get_rect(center=pos)
+
+    def update(self, dt):
+        self.frame_index += 20*dt
+        if self.frame_index < len(self.frames):
+            self.image = self.frames[int(self.frame_index)]
+        else:
             self.kill()
 
 
@@ -86,15 +109,18 @@ def collisions_action():
             laser, meteor_sprites, True)
         if collided_sprites:
             laser.kill()
+            AnimationExplosion(
+                explosion_frames, laser.rect.midtop, all_sprites)
 
 
 def display_score():
-    current_time = pygame.time.get_ticks()
+    current_time = pygame.time.get_ticks()//100
     text_surface = font.render(str(current_time), True, (240, 240, 240))
     text_rect = text_surface.get_rect(
         midbottom=(WINDOW_WIDTH/2, WINDOW_HEIGHT-50))
     display_surface.blit(text_surface, text_rect)
-
+    pygame.draw.rect(display_surface, (240, 240, 240),
+                     text_rect.inflate(20, 30).move(0, -8), 5, 10)
 
     # General setup
 pygame.init()
@@ -109,6 +135,8 @@ star_surf = pygame.image.load(join("images", "star.png"))
 meteor_surface = pygame.image.load(join("images", "meteor.png"))
 laser_surface = pygame.image.load(join("images", "laser.png"))
 font = pygame.font.Font(join("images", "Oxanium-Bold.ttf"), 40)
+explosion_frames = [pygame.image.load(
+    join("images", "explosion", f'{i}.png')).convert_alpha() for i in range(21)]
 
 
 # Sprites
@@ -139,5 +167,6 @@ while running:
     display_surface.fill('purple')
     all_sprites.draw(display_surface)
     display_score()
+    pygame.draw.line(display_surface, "green", (0, 0), player.rect.center, 10)
     pygame.display.update()
 pygame.quit()
