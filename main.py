@@ -124,7 +124,6 @@ def display_score():
     pygame.draw.rect(display_surface, (240, 240, 240),
                      text_rect.inflate(20, 30).move(0, -8), 5, 10)
 
-
     # General setup
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720,
@@ -147,7 +146,9 @@ game_music = pygame.mixer.Sound(join("audio", "game_music.wav"))
 laser_sound.set_volume(0.5)
 game_music.set_volume(0.4)
 game_music.play()
+
 # Sprites
+
 all_sprites = pygame.sprite.Group()
 meteor_sprites = pygame.sprite.Group()
 laser_sprites = pygame.sprite.Group()
@@ -157,6 +158,7 @@ for i in range(20):
 player = Player(all_sprites)
 
 # Custom Events
+
 meteor_event = pygame.event.custom_type()
 pygame.time.set_timer(meteor_event, 800)
 
