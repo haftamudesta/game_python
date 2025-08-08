@@ -129,8 +129,8 @@ To play the game:
 use the left,right,down, up and space keys
 To move the player to the left use the left key.
 To move the player to the right use the right key.
-To move the player to  down use  down key.
-To move the player to up use  up key.
+To move the player  down use  down key.
+To move the player up use  up key.
 To shoot the enemy use space key.
 ```
 
