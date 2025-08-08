@@ -37,7 +37,7 @@
 
 # 📖 Space shooter <a name="about-project"></a>
 
-**Space shooter**  is a classic  game where the player controls a spaceship or aircraft, shooting enemies while dodging their attacks. 
+**Space shooter**  is a classic  game where the player controls a spaceship or aircraft, shooting enemies while doing their attacks. 
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -46,10 +46,8 @@
 <details>
   <summary>Client</summary>
   <ul>
-<li><a href="https://www.w3.org/html/" target="_blank"><img align="center" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/html-icon.svg" alt="html5" width="55" height="55"/></a></li>
-<li><a href="https://www.w3schools.com/css/" target="_blank"><img align="center" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/css-icon.svg" alt="css3" width="55" height="55"/></a></li>
-<li><a href="https://reactjs.org/" target="_blank"><img align="center" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/react-js-icon.svg" alt="react js" width="55" height="55"/></a></li>
-<li><a href="https://redux.js.org/" target="_blank"><img align="center" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/redux-icon.svg" alt="react js" width="55" height="55"/></a></li>
+<li>Python</li>
+<li>Pygame</li>
   </ul>
 </details>
 
@@ -57,7 +55,7 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **Shoot wnen enemy comes down**
+- **Shoot when enemy comes down**
 - **kill the enemy**
 - **Create explosion**
 
@@ -92,11 +90,11 @@ In order to run this project you need:
 - [ ] Clone this repository to your desired folder:
 
 ```
-git clone https://github.com/hernandanielzamora/Space-traveler-hub
+git clone https://github.com/haftamudesta/game_python
 ```
 
 ```
-cd Space-traveler-hub
+cd game_python
 ```
 
 - [ ] Open the file in your code editor
